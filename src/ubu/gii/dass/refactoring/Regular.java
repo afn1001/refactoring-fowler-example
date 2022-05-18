@@ -3,15 +3,16 @@ package ubu.gii.dass.refactoring;
 public class Regular extends MovieType {
 
 	@Override
-	public double getCharge() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getCharge(Rental rental) {
+		double amount = 2;
+		if (rental.getDaysRented() > 2)
+			amount += (rental.getDaysRented() - 2) * 1.5;
+		return amount;
 	}
 
 	@Override
 	public int getType() {
-		// TODO Auto-generated method stub
-		return 0;
+		return MovieType.REGULAR;
 	}
 	
 

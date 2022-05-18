@@ -46,6 +46,7 @@ public class VideoClubTest {
 				+ "\tHermano Oso\t12.0\n" + "Amount owed is 29.0\n"
 				+ "You earned 4 frequent renter points");
 
+		System.out.println(salida);
 		assertTrue("Calcula mal el alquiler", salidaEsperada.equals(salida));
 
 	}

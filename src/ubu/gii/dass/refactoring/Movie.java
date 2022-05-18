@@ -12,16 +12,13 @@ package ubu.gii.dass.refactoring;
  */
 
 public class Movie {
-	public static final int CHILDRENS = 2;
-	public static final int REGULAR = 0;
-	public static final int NEW_RELEASE = 1;
-
 	private String _title;
 	private int _priceCode;
+	private MovieType _movieType;
 
 	public Movie(String title, int priceCode) {
 		_title = title;
-		_priceCode = priceCode;
+		setPriceCode(priceCode);
 	}
 
 	public int getPriceCode() {
@@ -30,9 +27,44 @@ public class Movie {
 
 	public void setPriceCode(int arg) {
 		_priceCode = arg;
+		switch (arg) {
+		case MovieType.CHILDRENS:
+			_movieType = new Children();
+			break;
+
+		case MovieType.NEW_RELEASE:
+			_movieType = new NewRelease();
+			break;
+
+		case MovieType.REGULAR:
+			_movieType = new Regular();
+			break;
+
+		default:
+			_movieType = null;
+			break;
+		}
 	}
 
 	public String getTitle() {
 		return _title;
+	}
+	
+	public int getType() {
+		return this._movieType.getType();
+	}
+
+	public double getCharge(Rental rental) {
+		return _movieType.getCharge(rental);
+	}
+
+	int getFrequentRentalPoints(Rental rental) {
+		int frequentRenterPoints = 0;
+		frequentRenterPoints++;
+		// add bonus for a two day new release rental
+		if ((rental.getMovie().getPriceCode() == MovieType.NEW_RELEASE)
+				&& rental.getDaysRented() > 1)
+			frequentRenterPoints++;
+		return frequentRenterPoints;
 	}
 }
