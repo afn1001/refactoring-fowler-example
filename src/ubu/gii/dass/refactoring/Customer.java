@@ -42,7 +42,7 @@ public class Customer {
 			thisAmount = each.getCharge(thisAmount);
 			
 			// add frequent renter points
-			frequentRenterPoints = each.getFrequentRentalPoints(frequentRenterPoints);
+			frequentRenterPoints += each.getFrequentRentalPoints();
 			// show figures for this rental
 			result += "\t" + each.getMovie().getTitle() + "\t"
 					+ String.valueOf(thisAmount) + "\n";
